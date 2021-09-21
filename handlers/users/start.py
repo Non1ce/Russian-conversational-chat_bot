@@ -1,18 +1,41 @@
+# -*- coding: utf-8 -*-
+
+from Jobs.chat_server_aiogram.middlewares.throttling import rate_limit
+from Jobs.chat_server_aiogram.loader import dp
+
+from aiogram import types
+
 import logging
 import os
-from aiogram import types
-from aiogram.dispatcher.filters.builtin import CommandStart
 
-from Jobs.chat_server_aiogram.loader import dp
-from Jobs.chat_server_aiogram.middlewares.throttling import rate_limit
-from Jobs.chat_server_aiogram.filters.eng_symbols import eng_symbols
+"""
+
+Created on 10.09.2021
+
+@author: Nikita
+
+
+"""
 
 
 @rate_limit(5, 'start')
-@dp.message_handler(CommandStart(), eng_symbols())
-async def bot_start(message: types.Message, filter):
+@dp.message_handler(commands='start')
+async def bot_start(message: types.Message):
 
-    logging.info(f'4. Handler = {os.path.basename(__file__)}')
-    await message.answer(f"Привет, {message.from_user.full_name}! \n {filter=}")
+    """
 
-    return {'from_handler': 'Данные из handler'}
+    The function is designed to welcome a new bot user.
+
+    """
+
+    logging.info(f'Handler = {os.path.basename(__file__)}')
+
+    await types.ChatActions.typing()
+
+    first_name = message.from_user.first_name
+    devs_id = '<a href="https://t.me/no_n1ce">Nikita</a>'
+
+    await message.answer(
+        text=f"Привет, {first_name}! Я создатель этого разговорного чат-бота 🤔."
+             f" По всем вопросам, можешь написать мне {devs_id}!",
+        parse_mode=types.ParseMode.HTML)

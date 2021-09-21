@@ -49,7 +49,6 @@ class ThrottlingMiddleware(BaseMiddleware):
 
         logging.info("-------------Новый апдейт------------------")
         logging.info('1. Pre_process_update')
-        # data["middleware_data"] = 'Это пройдет до'
 
         if update.message:
             user_id = update.message.from_user.id
@@ -63,20 +62,6 @@ class ThrottlingMiddleware(BaseMiddleware):
         if user_id in ban_user:
             raise CancelHandler()
 
-    # # 2
-    # async def on_process_update(self, update: types.Update, data: dict):
-    #     logging.info(f'2. Process_update, {data=}')
-    #     pass
-    #
-    # # 3
-    # async def on_pre_process_message(self, update: types.Update, data: dict):
-    #     logging.info(f'3. Pre_process_message, {data=}')
-    #     data['middleware_data'] = 'Это пройдет до'
-    #     pass
-
-    # 4 Filters
-
-    # 5
     async def on_process_message(self, message: types.Message, data: dict):
 
         logging.info('2. Pre_process_message')
