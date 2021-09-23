@@ -5,31 +5,7 @@ from aiogram.dispatcher import DEFAULT_RATE_LIMIT
 from aiogram.dispatcher.handler import CancelHandler, current_handler
 from aiogram.dispatcher.middlewares import BaseMiddleware
 from aiogram.utils.exceptions import Throttled
-from Jobs.chat_server_aiogram.loader import dp
-from Jobs.chat_server_aiogram.data.config import ban_user
-
-
-def rate_limit(limit: int, key=None):
-
-    """
-
-    Decorator for configuring rate limit and key in different functions.
-    :param limit:
-    :param key:
-    :return:
-
-    """
-
-    def decorator(func):
-
-        setattr(func, 'throttling_rate_limit', limit)
-
-        if key:
-            setattr(func, 'throttling_key', key)
-
-        return func
-
-    return decorator
+from Jobs.chatbot.data.config import ban_user
 
 
 class ThrottlingMiddleware(BaseMiddleware):
@@ -45,7 +21,7 @@ class ThrottlingMiddleware(BaseMiddleware):
         self.prefix = key_prefix
         super(ThrottlingMiddleware, self).__init__()
 
-    async def on_pre_process_update(self, update: types.Update, data: dict):
+    async def on_pre_process_update(self, update: types.Update):
 
         logging.info("-------------Новый апдейт------------------")
         logging.info('1. Pre_process_update')
@@ -62,7 +38,7 @@ class ThrottlingMiddleware(BaseMiddleware):
         if user_id in ban_user:
             raise CancelHandler()
 
-    async def on_process_message(self, message: types.Message, data: dict):
+    async def on_process_message(self, message: types.Message):
 
         logging.info('2. Pre_process_message')
         handler = current_handler.get()
@@ -123,11 +99,3 @@ class ThrottlingMiddleware(BaseMiddleware):
         # If current message is not last with current key - do not send message
         if thr.exceeded_count == throttled.exceeded_count:
             await message.reply('Unlocked.')
-
-
-# @dp.message_handler(commands=['start'])
-# @rate_limit(5, 'start')  # this is not required but you can configure throttling manager for current handler using it
-# async def cmd_test(message: types.Message):
-#
-#     # You can use this command every 5 seconds
-#     await message.reply('Test passed! You can use this command every 5 seconds.')

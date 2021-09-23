@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from Jobs.chat_server_aiogram.middlewares.throttling import rate_limit
-from Jobs.chat_server_aiogram.loader import dp
+from Jobs.chatbot.utils.misc.throttling import rate_limit
+from Jobs.chatbot.loader import dp
 
 from aiogram import types
 import asyncio

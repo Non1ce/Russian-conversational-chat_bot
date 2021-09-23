@@ -1,6 +1,6 @@
 import logging
 
-logging.basicConfig(format=u'%(filename)s [LINE:%(lineno)d] #%(levelname)-8s [%(asctime)s]  %(message)s',
-                    level=logging.INFO,
-                    # level=logging.DEBUG,  # Можно заменить на другой уровень логгирования.
-                    )
+logging.basicConfig(
+    format=f"%(asctime)s - [%(levelname)s] - %(name)s - (%(filename)s).%(funcName)s(%(lineno)d) - %(message)s",
+    level=logging.INFO)
+logging.getLogger(__name__)

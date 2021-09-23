@@ -2,7 +2,7 @@ import logging
 
 from aiogram import Dispatcher
 
-from Jobs.chat_server_aiogram.data.config import ADMINS
+from Jobs.chatbot.data.config import ADMINS
 
 
 async def on_startup_notify(dp: Dispatcher):
