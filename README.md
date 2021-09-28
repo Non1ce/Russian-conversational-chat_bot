@@ -5,7 +5,7 @@
 [![Slack](https://img.shields.io/badge/Slack-533849?style=flat&logo=Slack&logoColor=white)](https://opendatascience.slack.com/team/U0242E4H1MH)
 
 <p align="center">
-  <img  src="https://github.com/Non1ce/Image/blob/main/Chat_bot/Logo.v1.svg">
+  <img  src="https://github.com/Non1ce/Image/blob/main/Chat_bot/Logo.v2.svg">
 </p>
 
 ---
