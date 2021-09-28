@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 from aiogram import executor
 
 from Jobs.chatbot.loader import dp
@@ -7,6 +10,17 @@ import handlers
 from utils.notify_admins import on_startup_notify
 from utils.set_bot_commands import set_default_commands
 from Jobs.chatbot.gpt_3 import load_model
+
+
+"""
+
+
+    Created on 10.09.2021
+
+    @author: Nikita
+
+
+"""
 
 
 async def on_startup(dispatcher):

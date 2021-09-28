@@ -1,30 +1,38 @@
-import asyncio
-import logging
-from aiogram import types, Dispatcher
-from aiogram.dispatcher import DEFAULT_RATE_LIMIT
+# -*- coding: utf-8 -*-
+
+
 from aiogram.dispatcher.handler import CancelHandler, current_handler
+from Jobs.chatbot.utils.db_api.set_ban_members import ban_members
+from Jobs.chatbot.utils.db_api.unban_members import unban_member
+from Jobs.chatbot.data.config import ban_time, exceeded_count
 from aiogram.dispatcher.middlewares import BaseMiddleware
+from aiogram.dispatcher import DEFAULT_RATE_LIMIT
 from aiogram.utils.exceptions import Throttled
-from Jobs.chatbot.data.config import ban_user
+from aiogram import types, Dispatcher
+import asyncio
+
+
+"""
+
+
+Created on 10.09.2021
+
+@author: Nikita
+
+
+"""
 
 
 class ThrottlingMiddleware(BaseMiddleware):
 
-    """
-
-    Simple middleware
-
-    """
-
     def __init__(self, limit=DEFAULT_RATE_LIMIT, key_prefix='antiflood_'):
+
         self.rate_limit = limit
         self.prefix = key_prefix
+
         super(ThrottlingMiddleware, self).__init__()
 
-    async def on_pre_process_update(self, update: types.Update):
-
-        logging.info("-------------Новый апдейт------------------")
-        logging.info('1. Pre_process_update')
+    async def on_pre_process_update(self, update: types.Update, data: dict):
 
         if update.message:
             user_id = update.message.from_user.id
@@ -35,12 +43,12 @@ class ThrottlingMiddleware(BaseMiddleware):
         else:
             return
 
-        if user_id in ban_user:
+        if user_id in await unban_member(user_id=user_id, ban_time=ban_time):
+
             raise CancelHandler()
 
-    async def on_process_message(self, message: types.Message):
+    async def on_process_message(self, message: types.Message, data: dict):
 
-        logging.info('2. Pre_process_message')
         handler = current_handler.get()
         dispatcher = Dispatcher.get_current()
 
@@ -54,7 +62,6 @@ class ThrottlingMiddleware(BaseMiddleware):
             limit = self.rate_limit
             key = f"{self.prefix}_message"
 
-        # Use Dispatcher.throttle method.
         try:
             await dispatcher.throttle(key, rate=limit)
 
@@ -67,35 +74,22 @@ class ThrottlingMiddleware(BaseMiddleware):
 
         """
 
+
         Notify user only on first exceed and notify about unlocking only on last exceed
 
-        :param message:
-        :param throttled:
 
         """
 
-        handler = current_handler.get()
-        dispatcher = Dispatcher.get_current()
-
-        if handler:
-            key = getattr(handler, 'throttling_key', f"{self.prefix}_{handler.__name__}")
-
-        else:
-            key = f"{self.prefix}_message"
-
-        # Calculate how many time is left till the block ends
-        delta = throttled.rate - throttled.delta
-
         # Prevent flooding
-        if throttled.exceeded_count <= 2:
-            await message.reply('Too many requests!')
+        if throttled.exceeded_count == exceeded_count:
 
-        # Sleep.
-        await asyncio.sleep(delta)
+            await message.reply('Слишком много запросов 😤!')
 
-        # Check lock status
-        thr = await dispatcher.check_key(key)
+            await ban_members(user_id=throttled.user,
+                              time_out=throttled.called_at)
 
-        # If current message is not last with current key - do not send message
-        if thr.exceeded_count == throttled.exceeded_count:
-            await message.reply('Unlocked.')
+            await message.reply(f'Вы были заблокированы, на {ban_time} секунд!')
+
+            await asyncio.sleep(ban_time)
+
+            await message.reply('Вас разблокировали, теперь Вы снова можете пообщаться со мной 🧐!')

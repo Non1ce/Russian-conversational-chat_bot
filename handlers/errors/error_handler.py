@@ -5,7 +5,7 @@ from aiogram.utils.exceptions import (Unauthorized, InvalidQueryID, TelegramAPIE
                                       CantParseEntities, MessageCantBeDeleted)
 
 
-from Jobs.chat_server_aiogram.loader import dp
+from Jobs.chatbot.loader import dp
 
 
 @dp.errors_handler()
