@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
+
 from Jobs.chatbot.utils.misc.throttling import rate_limit
 from Jobs.chatbot.loader import dp
-
 from aiogram import types
 import asyncio
 
@@ -17,7 +17,7 @@ import asyncio
 """
 
 
-@rate_limit(5, 'eng_symbols')
+@rate_limit(5, 'unknown_symbol')
 @dp.message_handler(regexp=r'^[\W]+$')
 async def bot_message(message: types.Message):
 

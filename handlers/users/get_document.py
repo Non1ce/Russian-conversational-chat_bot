@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
 
+
 from Jobs.chatbot.utils.misc.throttling import rate_limit
 from Jobs.chatbot.loader import dp
-
 from aiogram import types
-
 import asyncio
-import logging
-import os
 
 
 """
@@ -29,8 +26,6 @@ async def bot_start(message: types.Message):
     The function is designed to welcome a new bot user.
 
     """
-
-    logging.info(f'Handler = {os.path.basename(__file__)}')
 
     await types.ChatActions.typing()
 

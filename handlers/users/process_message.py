@@ -15,15 +15,15 @@ import asyncio
 """
 
 
-Created on 10.09.2021
-
-@author: Nikita
+    Created on 10.09.2021
+    
+    @author: Nikita
 
 
 """
 
 
-@rate_limit(5, 'message')
+@rate_limit(10, 'message')
 @dp.message_handler()
 async def processing_message(message: types.Message, state: FSMContext):
 

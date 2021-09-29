@@ -9,9 +9,9 @@ from aiogram import types
 """
 
 
-Created on 10.09.2021
-
-@author: Nikita
+    Created on 10.09.2021
+    
+    @author: Nikita
 
 
 """
@@ -22,7 +22,6 @@ async def bot_help(message: types.Message):
     text = ("Список команд: ",
             "/start - Начать диалог",
             "/help - Получить справку",
-            "/dice - Подкинуть кубик",
-            "/horoscope - Получить гороскоп")
+            "/dice - Подкинуть кубик")
     
     await message.answer("\n".join(text))

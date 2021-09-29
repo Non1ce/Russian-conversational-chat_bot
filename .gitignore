@@ -132,3 +132,6 @@ dmypy.json
 
 # Model and tokenizer
 gpt_3/
+
+# Test folder
+test/

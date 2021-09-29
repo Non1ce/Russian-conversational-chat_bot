@@ -16,4 +16,3 @@ password = env.str("password")
 # Config для middleware
 ban_time = 60
 exceeded_count = 3
-

@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
-import mysql.connector
+
 from Jobs.chatbot.data import config
+import mysql.connector
+import logging
 
 
 """
@@ -20,3 +22,5 @@ db = mysql.connector.connect(host=config.host,
                              password=config.password)
 
 cursor = db.cursor()
+
+logging.info('The connection to the database is established!')
