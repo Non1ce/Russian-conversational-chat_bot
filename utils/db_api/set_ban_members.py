@@ -1,21 +1,27 @@
 # -*- coding: utf-8 -*-
 
 
-from Jobs.chatbot.utils.db_api.creat_db import db, cursor
+from utils.db_api.creat_db import db, cursor
 
 
 """
 
 
-Created on 10.09.2021
-
-@author: Nikita
+    Created on 24.09.2021
+    
+    @author: Nikita
 
 
 """
 
 
 async def ban_members(user_id, time_out):
+
+    """
+
+    The function is designed to ban the chat user.
+
+    """
 
     add_members = f"""
                     INSERT 

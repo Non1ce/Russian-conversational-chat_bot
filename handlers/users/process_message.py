@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
 
 
-from Jobs.chatbot.gpt_3.preprocessing import (encoding_text,
-                                              decoding_text,
-                                              get_text_gpt3)
-
-from Jobs.chatbot.utils.misc.throttling import rate_limit
-from Jobs.chatbot.loader import dp
+from gpt_3.preprocessing import encoding_text, decoding_text, get_text_gpt3
+from utils.misc.throttling import rate_limit
 from aiogram.dispatcher import FSMContext
 from aiogram import types
+from loader import dp
 import asyncio
 
 
@@ -23,7 +20,7 @@ import asyncio
 """
 
 
-@rate_limit(10, 'message')
+@rate_limit(3, 'message')
 @dp.message_handler()
 async def processing_message(message: types.Message, state: FSMContext):
 

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 
-from Jobs.chatbot.utils.misc.tg_html import mention_html
-from Jobs.chatbot.data.config import ADMINS
-from Jobs.chatbot.loader import dp, bot
+from utils.misc.tg_html import mention_html
+from data.config import ADMINS
+from loader import dp, bot
 from aiogram import types
 import traceback
 import logging
@@ -13,7 +13,7 @@ import sys
 """
 
 
-    Created on 10.09.2021
+    Created on 25.09.2021
 
     @author: Nikita
 

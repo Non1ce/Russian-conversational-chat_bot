@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 
-from Jobs.chatbot.utils.misc.throttling import rate_limit
-from Jobs.chatbot.loader import dp
+from utils.misc.throttling import rate_limit
 from aiogram import types
+from loader import dp
 
 
 """
@@ -22,7 +22,7 @@ async def bot_start(message: types.Message):
 
     """
 
-    The function is designed to welcome a new bot user.
+    The function is designed to process the sticker.
 
     """
 

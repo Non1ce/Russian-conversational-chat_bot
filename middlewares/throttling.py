@@ -2,9 +2,9 @@
 
 
 from aiogram.dispatcher.handler import CancelHandler, current_handler
-from Jobs.chatbot.utils.db_api.set_ban_members import ban_members
-from Jobs.chatbot.utils.db_api.unban_members import unban_member
-from Jobs.chatbot.data.config import ban_time, exceeded_count
+from utils.db_api.set_ban_members import ban_members
+from utils.db_api.unban_members import unban_member
+from data.config import ban_time, exceeded_count
 from aiogram.dispatcher.middlewares import BaseMiddleware
 from aiogram.dispatcher import DEFAULT_RATE_LIMIT
 from aiogram.utils.exceptions import Throttled
@@ -15,7 +15,7 @@ import asyncio
 """
 
 
-    Created on 10.09.2021
+    Created on 26.09.2021
     
     @author: Nikita
 

@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 
 
-from Jobs.chatbot.utils.misc.throttling import rate_limit
-from Jobs.chatbot.loader import dp
+from utils.misc.throttling import rate_limit
 from aiogram import types
+from loader import dp
 import asyncio
 
 
 """
 
-    Created on 10.09.2021
+    Created on 15.09.2021
     
     @author: Nikita
 
@@ -20,12 +20,6 @@ import asyncio
 @rate_limit(5, 'document')
 @dp.message_handler(content_types=types.ContentTypes.DOCUMENT)
 async def bot_start(message: types.Message):
-
-    """
-
-    The function is designed to welcome a new bot user.
-
-    """
 
     await types.ChatActions.typing()
 

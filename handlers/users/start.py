@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 
-from Jobs.chatbot.utils.misc.throttling import rate_limit
-from Jobs.chatbot.utils.misc.tg_html import mention_html
-from Jobs.chatbot.loader import dp
+from utils.misc.throttling import rate_limit
+from utils.misc.tg_html import mention_html
 from aiogram import types
+from loader import dp
 
 
 """

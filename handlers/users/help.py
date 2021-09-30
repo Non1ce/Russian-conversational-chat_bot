@@ -2,8 +2,8 @@
 
 
 from aiogram.dispatcher.filters.builtin import CommandHelp
-from Jobs.chatbot.loader import dp
 from aiogram import types
+from loader import dp
 
 
 """

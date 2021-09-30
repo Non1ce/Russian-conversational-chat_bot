@@ -1,21 +1,27 @@
 # -*- coding: utf-8 -*-
 
 
-from Jobs.chatbot.utils.db_api.creat_db import cursor
+from utils.db_api.creat_db import cursor
 
 
 """
 
 
-Created on 10.09.2021
-
-@author: Nikita
+    Created on 24.09.2021
+    
+    @author: Nikita
 
 
 """
 
 
 async def unban_member(user_id, ban_time):
+
+    """
+
+    The function is designed to unban the chat user.
+
+    """
 
     del_members = f"DELETE from banned_chat_members WHERE time_out < DATE_SUB(NOW(), INTERVAL {ban_time} SECOND)"
 

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-from Jobs.chatbot.data import config
+from data import config
 import mysql.connector
 import logging
 
@@ -9,12 +9,13 @@ import logging
 """
 
 
-Created on 10.09.2021
-
-@author: Nikita
+    Created on 24.09.2021
+    
+    @author: Nikita
 
 
 """
+
 
 db = mysql.connector.connect(host=config.host,
                              database=config.database,

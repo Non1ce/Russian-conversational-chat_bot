@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
 
 
-from Jobs.chatbot.utils.misc.throttling import rate_limit
-from Jobs.chatbot.loader import dp
-
+from utils.misc.throttling import rate_limit
 from aiogram import types
+from loader import dp
 import asyncio
 
 
 """
 
-    Created on 20.09.2021
+    Created on 29.09.2021
 
     @author: Nikita
 

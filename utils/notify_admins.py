@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-from Jobs.chatbot.data.config import ADMINS
+from data.config import ADMINS
 from aiogram import Dispatcher
 import logging
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from Jobs.chatbot.loader import dp
+from loader import dp
 from .throttling import ThrottlingMiddleware
 
 
