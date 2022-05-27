@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
 
-from gpt_3.preprocessing import encoding_text, decoding_text, get_text_gpt3
+from gpt_3.preprocessing import (encoding_text, 
+                                 decoding_text, 
+                                 get_text_gpt3)
+
 from utils.misc.throttling import rate_limit
 from aiogram.dispatcher import FSMContext
 from aiogram import types
@@ -20,7 +23,7 @@ import asyncio
 """
 
 
-async def zero_output(message: types.Message):
+async def zero_output(message: types.Message) -> types.Message:
 
     await message.answer(text="Упс...")
 
@@ -32,11 +35,11 @@ async def zero_output(message: types.Message):
 
 @rate_limit(3, 'message')
 @dp.message_handler()
-async def processing_message(message: types.Message, state: FSMContext):
+async def processing_message(message: types.Message, state: FSMContext) -> types.Message:
 
     """
 
-    The function is designed to receive messages in russian and generate a response.
+        The function is designed to receive messages in russian and generate a response.
 
     """
 
@@ -51,11 +54,9 @@ async def processing_message(message: types.Message, state: FSMContext):
 
     input_text, check_question = encoding_text(text_encode=text)
 
-    if 'history_text' in data_storage:
+    if text == data_storage.get('history_text'):
 
-        if text == data_storage['history_text']:
-
-            await message.answer(text="Ой... Где-то я уже это видел! 🥱")
+        await message.answer(text="Ой... Где-то я уже это видел! 🥱")
 
         # input_text = torch.cat([context.chat_data['output'][-1], input_text[0]], dim=0)
         # input_text = input_text.unsqueeze(0)
